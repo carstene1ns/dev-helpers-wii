@@ -1,0 +1,19 @@
+#!/bin/sh
+
+###############################################################################
+# This is a helper script that provides pkg-config support to build systems
+# like autotools or cmake for Wii homebrew compiling. It uses an exported
+# variable from devkitpro/devkitppc and points the hosts pkg-config to the
+# right folder. 
+#
+# carstene1ns, 2014
+###############################################################################
+
+# overwrite default library dir (so no host libraries are used)
+export PKG_CONFIG_LIBDIR="$DEVKITPRO/portlibs/ppc/lib/pkgconfig"
+
+# this may be needed later to support additional paths
+#export PKG_CONFIG_PATH=/custom/path:$PKG_CONFIG_PATH
+
+# execute hosts pkg-config with the given command line args.
+exec pkg-config $@
